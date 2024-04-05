@@ -1,0 +1,23 @@
+version: 1
+formatters:
+  default:
+    format: "%(asctime)s - %(process)d - %(name)s - %(levelname)s %(message)s"
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: default
+    stream: ext://sys.stdout
+  file:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: default
+    filename: sqlci.log
+loggers:
+  sqlci:
+    level: DEBUG
+    handlers: [file]
+    propagate: no
+root:
+  level: DEBUG
+  handlers: [console]
