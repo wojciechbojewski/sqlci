@@ -105,14 +105,23 @@ class sqlserver:
                                     | "double"
                                 ):
                                     _tmp["Type"] = row.Type
-                                case "char" | "varchar" | "nchar" | "nvarchar":
+                                case (
+                                    "char"
+                                    | "varchar"
+                                    | "nchar"
+                                    | "nvarchar"
+                                    | "binary"
+                                    | "varbinary"
+                                ):
                                     _tmp["Type"] = f"{row.Type}({row.Length})"
                                 case "numeric":
                                     _tmp["Type"] = (
                                         f"{row.Type}({str(row.Prec).strip()},{str(row.Scale).strip()})"
                                     )
                                 case _:
-                                    raise NotImplementedError()
+                                    raise NotImplementedError(
+                                        f"Not implemented type {row.Type}"
+                                    )
                             _tmp["Nullable"] = row.Nullable
                             resultset["columns"].append(_tmp)
 
