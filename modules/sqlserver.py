@@ -103,6 +103,7 @@ class sqlserver:
                                     | "uniqueidentifier"
                                     | "float"
                                     | "double"
+                                    | "bit"
                                 ):
                                     _tmp["Type"] = row.Type
                                 case (
