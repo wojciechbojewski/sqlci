@@ -78,7 +78,7 @@ if __name__ == "__main__":
                     file.write("\n\n" + table.build())
             if type == "views" or type == "procedures":
                 for item in read_items(config, type):
-                    database, schema, object = list(item.keys())[0].split(".")
+                    database, schema, object = unpack_object(item)
                     result = sqlserver.sp_helptext(conn, f"{schema}.{object}")
                     file.write("\n")
                     file.write("".join(result))
