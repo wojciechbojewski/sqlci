@@ -13,6 +13,7 @@ handlers:
     level: DEBUG
     formatter: default
     filename: sqlci.log
+    mode: w
 loggers:
   sqlci:
     level: DEBUG

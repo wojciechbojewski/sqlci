@@ -5,16 +5,13 @@
 version: 1
 source:
   dsn: PROD
-target:
-  driver: ODBC Driver 18 for SQL Server
-  server: DESKTOP-F1E0DKV\SQL2022
-  database: master
-  trusted: "yes"
-  encrypt: "no"
+# target:
+#   driver: ODBC Driver 18 for SQL Server
+#   server: DESKTOP-F1E0DKV\SQL2022
+#   database: master
+#   trusted: "yes"
+#   encrypt: "no"
 objects:
-  SQLCI.sqlci.Procedure_Example:
-    sync: True # Create all missing object and dependencies (database, schema, tables, views etc)
-    ddl: False # Save sql script in file
-    model: False # Generate python class for SQLAlchemy ORM (TODO)
-  SQLCI.sqlci.View_Example:
   SQLCI.sqlci.Table_Example:
+  # SQLCI.sqlci.View_Example:
+  # SQLCI.sqlci.Procedure_Example:

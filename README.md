@@ -6,6 +6,11 @@ The tool to sync and test part of database SQL Server
 
 > python sqlci.py [-h] config_file_yaml
 
+## output
+
+generate file with sql script (output.sql)
+(on this stage it will be not wise deploy on server)
+
 # resources
 
 * odbc error
