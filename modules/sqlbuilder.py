@@ -47,7 +47,8 @@ class sqlbuilder:
                         alter = f"ALTER TABLE {self._name} ADD CONSTRAINT {name} PRIMARY KEY CLUSTERED ({keys})"
                         self._indexies.append(f"{alter}")
                     else:
-                        raise NotImplementedError()
+                        print(f"Ignore index: {index}")
+                        #raise NotImplementedError()
             return self
 
         def addConstraint(self, constraint: dict):
