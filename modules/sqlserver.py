@@ -3,6 +3,11 @@ import pyodbc
 
 class sqlserver:
 
+    def use(self, conn, database):
+        curr = conn.cursor()
+        curr.execute(f"USE {database}")
+        curr.close()
+
     def sp_helptext(self, conn, object=None):
         if object == None:
             raise NotImplementedError()
