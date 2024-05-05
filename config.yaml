@@ -1,7 +1,3 @@
-#
-# Sync example
-#
-
 version: 1
 source:
   dsn: PROD
@@ -11,7 +7,11 @@ source:
 #   database: master
 #   trusted: "yes"
 #   encrypt: "no"
-objects:
-  SQLCI.sqlci.Table_Example:
-  # SQLCI.sqlci.View_Example:
-  # SQLCI.sqlci.Procedure_Example:
+dump:
+  tables:
+    - sqlci.sqlci.Table_Example:
+    - sqlci.sqlci.Table_Example2:
+  views:
+    - sqlci.sqlci.View_Example:
+  procedures:
+    - sqlci.sqlci.Procedure_Example:

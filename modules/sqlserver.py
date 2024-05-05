@@ -2,6 +2,27 @@ import pyodbc
 
 
 class sqlserver:
+
+    def sp_helptext(self, conn, object=None):
+        if object == None:
+            raise NotImplementedError()
+        text = []
+        curr = conn.cursor()
+        curr.execute(f"EXEC sp_helptext '{object}'")
+        work = True
+        while work:
+            if curr.messages:
+                raise TypeError("curr.messages")
+            if curr.description:
+                rows = map(lambda x: str(x[0]).replace("\r\n", "\n"), curr.fetchall())
+                rows = filter(lambda x: x != "\n", rows)
+                rows = list(rows)
+                rows.append("GO\n")
+                return rows
+            work = curr.nextset()
+        curr.close()
+        return text
+
     def sp_help(self, conn, table=None):
         if table == None:
             raise NotImplementedError()
