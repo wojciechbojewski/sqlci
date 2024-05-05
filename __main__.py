@@ -82,17 +82,25 @@ if __name__ == "__main__":
             if type == "tables":
                 for item in read_items(config, type):
                     database, schema, table = unpack_object(item)
+                    sqlserver.use(conn, database)
                     result = sqlserver.sp_help(conn, f"{schema}.{table}")
                     table = builder.generate_table(f"{schema}.{table}")
                     table = add_columns(table, result)
                     table = add_identity(table, result)
                     table = add_constraints(table, result)
                     table = add_indexies(table, result)
-                    file.write("\n\n" + table.build())
+                    file.write(f"\nUSE [{database}]\n\n" + table.build())
             if type == "views" or type == "procedures":
                 for item in read_items(config, type):
                     database, schema, object = unpack_object(item)
                     result = sqlserver.sp_helptext(conn, f"{schema}.{object}")
-                    file.write("\n")
+                    file.write(f"\nUSE [{database}]\n")
+                    match type:
+                        case "views":
+                            file.write(f"\nDROP VIEW IF EXISTS {schema}.{object}\nGO\n")
+                        case "procedures":
+                            file.write(
+                                f"\nDROP PROCEDURE IF EXISTS {schema}.{object}\nGO\n"
+                            )
                     file.write("".join(result))
         conn.close()
